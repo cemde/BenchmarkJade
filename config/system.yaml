@@ -1,0 +1,17 @@
+CE_TORRNODE:
+    PROJECT_DIR: "/homes/55/cornelius/BenchmarkJade"
+    DATA_DIR: "/scratch/network/ssd2/cornelius/data/"
+    LOG_DIR: "/scratch/network/ssd2/cornelius/logs/BenchmarkJade/"
+    ARTIFACTS_DIR: "/scratch/network/ssd2/cornelius/artifacts/BenchmarkJade/"
+    USE_GPU: True
+    NUM_WORKERS: 4
+    NETWORK: online
+
+CE_JADE2:
+    PROJECT_DIR: "/jmain02/home/J2AD009/ttl04/cxe09-ttl04/BenchmarkJade"
+    DATA_DIR: "/jmain02/home/J2AD009/ttl04/cxe09-ttl04/data"
+    LOG_DIR: "/jmain02/home/J2AD009/ttl04/cxe09-ttl04/BenchmarkJade/logs"
+    ARTIFACTS_DIR: "/jmain02/home/J2AD009/ttl04/cxe09-ttl04/BenchmarkJade/artifacts/"
+    USE_GPU: True
+    NUM_WORKERS: 4
+    NETWORK: offline
