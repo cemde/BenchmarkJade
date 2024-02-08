@@ -3,6 +3,13 @@
 Benchmark JADE2 GPU Performance
 
 
+# Benchmarks
+
+* `train.py` trains one epoch of dataset.
+* `inference.py` performs one epoch of inference of dataset.
+* `smooth_inference.py` iterates over the dataset itself and performs multiple-forward passes per input.
+
+
 # Results
 
 | Cluster | Dataset | Benchmark | Device Name | # Devices | Num Workers | Data Loading Time | Data Processing Time | Forward Time | Backward Time |
