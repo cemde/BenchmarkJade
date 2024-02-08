@@ -2,6 +2,7 @@ import torch
 import time
 import utils
 import argparse
+import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, choices=utils.DATASETS, default="imagenet", help="Dataset to use for benchmarking")
@@ -68,6 +69,9 @@ def main(args: argparse.Namespace):
     
     # print benchmark results
     utils.print_benchmark_results(fabric, args, data_loading_times, data_loading_times, forward_pass_times, [0], loop_time)
+
+    # return average times
+    return np.mean(data_loading_times), np.mean(data_loading_times), np.mean(forward_pass_times), 0
 
 
 if __name__ == "__main__":
