@@ -13,10 +13,11 @@ from torch.utils.data.distributed import DistributedSampler
 import argparse
 import lightning as L
 
+
 def print_system_info(fabric: L.Fabric) -> None:
     if fabric.local_rank != 0:
         return
-    
+
     try:
         import psutil
     except ImportError:
@@ -31,11 +32,11 @@ def print_system_info(fabric: L.Fabric) -> None:
         cpu_model_name = platform.processor()
 
         # Total memory in GB
-        total_memory = psutil.virtual_memory().total / (1024 ** 3)
+        total_memory = psutil.virtual_memory().total / (1024**3)
 
-        # cuda driver
+        # cuda driver
         try:
-            cuda_driver = os.popen('nvidia-smi --query-gpu=driver_version --format=csv,noheader').read().split('\n')[0]
+            cuda_driver = os.popen("nvidia-smi --query-gpu=driver_version --format=csv,noheader").read().split("\n")[0]
         except:
             cuda_driver = "N/A"
 
@@ -59,21 +60,31 @@ def print_system_info(fabric: L.Fabric) -> None:
 def print_args(fabric: L.Fabric, args: argparse.Namespace) -> None:
     if fabric.local_rank != 0:
         return
-    fabric.print("-"*50)
+    fabric.print("-" * 50)
     fabric.print("Arguments")
-    fabric.print("-"*50)
+    fabric.print("-" * 50)
     for arg in vars(args):
         fabric.print(f"{arg}: {getattr(args, arg)}")
     fabric.print("")
 
 
-def print_benchmark_results(fabric: L.Fabric, args: argparse.Namespace, data_loading_times: List[float], data_preprocessing_times: List[float], forward_pass_times: List[float], backward_pass_times: List[float], loop_time: float) -> None:
-    fabric.print("-"*50)
+def print_benchmark_results(
+    fabric: L.Fabric,
+    args: argparse.Namespace,
+    data_loading_times: List[float],
+    data_preprocessing_times: List[float],
+    forward_pass_times: List[float],
+    backward_pass_times: List[float],
+    loop_time: float,
+) -> None:
+    fabric.print("-" * 50)
     fabric.print("Benchmark Results")
-    fabric.print("-"*50)
+    fabric.print("-" * 50)
     fabric.print(f"Devices used:                    {fabric.world_size} x {torch.cuda.get_device_name(fabric.device)}")
     fabric.print(f"Average Data Loading Time:       {sum(data_loading_times)/len(data_loading_times):.4f} seconds")
-    fabric.print(f"Average Data Preprocessing Time: {sum(data_preprocessing_times)/len(data_preprocessing_times):.4f} seconds")
+    fabric.print(
+        f"Average Data Preprocessing Time: {sum(data_preprocessing_times)/len(data_preprocessing_times):.4f} seconds"
+    )
     fabric.print(f"Average Forward Pass Time:       {sum(forward_pass_times)/len(forward_pass_times):.4f} seconds")
     fabric.print(f"Average Backward Pass Time:      {sum(backward_pass_times)/len(backward_pass_times):.4f} seconds")
     fabric.print(f"Total Script Time:               {loop_time:.4f} seconds")
@@ -147,38 +158,56 @@ class ClusterManager:
     def to_dict(self) -> Dict[str, Any]:
         return {k.lower(): v for k, v in self._configs.items()}
 
+
 def setup(rank, world_size):
     dist.init_process_group(
-        "nccl",         # backend, "nccl" is recommended for GPU training
-        rank=rank,      # the current rank of the process
-        world_size=world_size  # the total number of processes
+        "nccl",  # backend, "nccl" is recommended for GPU training
+        rank=rank,  # the current rank of the process
+        world_size=world_size,  # the total number of processes
     )
     torch.cuda.set_device(rank)  # set the current GPU device
+
 
 def cleanup():
     dist.destroy_process_group()
 
+
 DATASETS = ["imagenet", "dummy"]
 
-def prepare(dataset: str, architecture: str, batch_size: int, num_workers: int, devices: List[int], cluster: ClusterManager, strategy: str = "dp", precision: str = "fp32"):
+
+def prepare(
+    dataset: str,
+    architecture: str,
+    batch_size: int,
+    num_workers: int,
+    devices: List[int],
+    cluster: ClusterManager,
+    strategy: str = "dp",
+    precision: str = "fp32",
+):
 
     if architecture == "resnet50":
         model = models.resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
     else:
         raise NotImplementedError(f"Architecture {architecture} not implemented.")
 
-
     # Define the ImageNet transformations
-    transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
+    transform = transforms.Compose(
+        [
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
 
     if dataset == "imagenet":
-        train_dataset = datasets.ImageNet(root=os.path.join(cluster.data_dir, "ImageNet"), split='val', transform=transform)
-        val_dataset = datasets.ImageNet(root=os.path.join(cluster.data_dir, "ImageNet"), split='val', transform=transform)
+        train_dataset = datasets.ImageNet(
+            root=os.path.join(cluster.data_dir, "ImageNet"), split="val", transform=transform
+        )
+        val_dataset = datasets.ImageNet(
+            root=os.path.join(cluster.data_dir, "ImageNet"), split="val", transform=transform
+        )
 
     elif dataset == "dummy":
         n_data = 50000
@@ -187,12 +216,15 @@ def prepare(dataset: str, architecture: str, batch_size: int, num_workers: int, 
     else:
         raise NotImplementedError(f"Dataset {dataset} not implemented.")
 
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=(dataset == "imagenet"))
-    val_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=(dataset == "imagenet"))
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=(dataset == "imagenet")
+    )
+    val_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=(dataset == "imagenet")
+    )
 
     # optimizer
     optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
-
 
     # launch the distributed training
     fabric = L.Fabric(accelerator="cuda", strategy=strategy, devices=devices, precision=precision)

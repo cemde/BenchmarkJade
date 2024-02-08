@@ -4,6 +4,7 @@ import os
 def run_script(file: str, dataset: str, devices: str):
     os.system(f"python {file} --dataset {dataset} --devices {devices}")
 
+
 if __name__ == "__main__":
     DEVICES = "0,1,2,3"
 
