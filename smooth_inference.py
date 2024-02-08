@@ -15,7 +15,6 @@ args = parser.parse_args()
 
 cluster = utils.ClusterManager()
 
-
 def main(args: argparse.Namespace):
 
     # get model and dataset
@@ -25,20 +24,32 @@ def main(args: argparse.Namespace):
     loop_start_time = time.time()
 
     data_loading_times = []
+    data_process_times = []
     forward_pass_times = []
 
     model.eval()
     fabric.barrier()
     end_of_batch_time = time.time()
     with torch.no_grad():
-        for i, (inputs, labels) in enumerate(val_loader):
+        for i in range(len(val_dataset)):
+            inputs, _ = val_dataset[i]
             fabric.barrier()
             data_ready_time = time.time()
             data_loading_times.append(data_ready_time - end_of_batch_time)
 
+            # preprocess data
+            inputs = fabric.to_device(inputs)
+            inputs = inputs.unsqueeze(0)  # Add batch dimension
+            inputs = inputs.repeat(args.batch_size, 1, 1, 1)
+            noise = torch.randn_like(inputs) * 0.25
+            inputs = inputs + noise
+            fabric.barrier()
+            data_process_times.append(time.time() - data_ready_time)
+
+            # forward pass
             forward_pass_start = time.time()
             outputs = model(inputs)
-            fabric.barrier()
+            outputs = fabric.all_gather(outputs)
             end_of_batch_time = time.time()
 
             forward_pass_times.append(end_of_batch_time - forward_pass_start)
@@ -56,7 +67,7 @@ def main(args: argparse.Namespace):
     utils.print_system_info(fabric)
     
     # print benchmark results
-    utils.print_benchmark_results(fabric, args, data_loading_times, [0], forward_pass_times, [0], loop_time)
+    utils.print_benchmark_results(fabric, args, data_loading_times, data_loading_times, forward_pass_times, [0], loop_time)
 
 
 if __name__ == "__main__":

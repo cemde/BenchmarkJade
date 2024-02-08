@@ -19,7 +19,7 @@ cluster = utils.ClusterManager()
 def main(args: argparse.Namespace):
 
     # get model and dataset
-    fabric, model, optimizer, train_loader, val_loader = utils.prepare(args.dataset, args.architecture, args.batch_size, args.num_workers, args.devices, cluster, args.strategy, args.precision)
+    fabric, model, optimizer, train_dataset, val_dataset, train_loader, val_loader = utils.prepare(args.dataset, args.architecture, args.batch_size, args.num_workers, args.devices, cluster, args.strategy, args.precision)
     
     # testing loop
     loop_start_time = time.time()

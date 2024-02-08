@@ -201,4 +201,4 @@ def prepare(dataset: str, architecture: str, batch_size: int, num_workers: int, 
     model, optimizer = fabric.setup(model, optimizer)
     train_loader, val_loader = fabric.setup_dataloaders(train_loader, val_loader)
 
-    return fabric, model, optimizer, train_loader, val_loader
+    return fabric, model, optimizer, train_dataset, val_dataset, train_loader, val_loader
