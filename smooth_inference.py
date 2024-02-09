@@ -92,7 +92,7 @@ def main(args: argparse.Namespace):
 
     # print benchmark results
     utils.print_benchmark_results(
-        fabric, args, data_loading_times, data_loading_times, forward_pass_times, [0], loop_time
+        fabric, args, data_loading_times, data_process_times, forward_pass_times, [0], loop_time
     )
 
     # return average times
