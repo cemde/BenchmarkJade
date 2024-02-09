@@ -52,6 +52,8 @@ def main(args: argparse.Namespace):
     end_of_batch_time = time.time()
     with torch.no_grad():
         for i in range(len(val_dataset)):
+            if i == 2000:
+                break
             inputs, _ = val_dataset[i]
             fabric.barrier()
             data_ready_time = time.time()
@@ -94,7 +96,7 @@ def main(args: argparse.Namespace):
     )
 
     # return average times
-    return np.mean(data_loading_times), np.mean(data_loading_times), np.mean(forward_pass_times), 0
+    return np.mean(data_loading_times), np.mean(data_process_times), np.mean(forward_pass_times), 0
 
 
 if __name__ == "__main__":
