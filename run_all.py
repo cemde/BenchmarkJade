@@ -6,8 +6,10 @@ def run_script(file: str, dataset: str, devices: str):
 
 
 if __name__ == "__main__":
-    DEVICES = "0,1,2,3"
-
+    DEVICES = "0,1,2,3,4,5,6,7"
+    DEVICES = "0,"
+    print(f"Devices: {DEVICES}")
+    
     run_script("train.py", "imagenet", DEVICES)
     run_script("train.py", "dummy", DEVICES)
 
