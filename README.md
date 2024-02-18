@@ -28,36 +28,18 @@ Benchmark JADE2 GPU Performance
 | TN | Dummy | Inference | A40 | 8 | 4 | 0.0539 | - | 0.1251 | - |
 | TN | Dummy | Train | A40 | 8 | 4 | 0.0601 | - | 0.1422 | 0.2109 |
 | TN | Dummy | Smooth Inference | A40 | 8 | 4 | 0.3265 | 0.0020 | 0.0074 | - |
-| - | - | - | - | -: | -: | -: | -: | -: | -: |
-| TN | ImageNet | Inference | V100 | 1 | 4 |  | - |  | - |
-| TN | ImageNet | Train | V100 | 1 | 4 |  | - |  |  |
-| TN | ImageNet | Smooth Inference | V100 | 1 | 4 |  |  |  | - |
-| TN | Dummy | Inference | V100 | 1 | 4 |  | - |  | - |
-| TN | Dummy | Train | V100 | 1 | 4 |  | - |  |  |
-| TN | Dummy | Smooth Inference | V100 | 1 | 4 |  |  |  | - |
-| - | - | - | - | -: | -: | -: | -: | -: | -: |
-| JADE2 | ImageNet | Inference | A40 | 4 | 4 | 5.8355 | - | 1.1637 | - |
-| JADE2 | ImageNet | Train | A40 | 4 | 4 | 5.2553 | - | 1.3720 | 0.8037 |
-| JADE2 | ImageNet | Smooth Inference | A40 | 4 | 4 | - | - | - | - |
-| JADE2 | Dummy | Inference | A40 | 4 | 4 | 3.3424 | - | 0.9132 | - |
-| JADE2 | Dummy | Train | A40 | 4 | 4 | 2.8620 | - | 1.0636 | 0.6111 |
-| JADE2 | Dummy | Smooth Inference | A40 | 4 | 4 | - | - | - | - |
-
-
-<!-- | TN | ImageNet | Inference | A40 | 4 | 4 | 0.0649 | - | 0.1104 | - |
-| TN | ImageNet | Train | A40 | 4 | 4 | 0.0183 | - | 0.1277 | 0.2036 |
-| TN | ImageNet | Smooth Inference | A40 | 4 | 4 | - | - | - | - |
-| TN | Dummy | Inference | A40 | 4 | 4 | 0.0485 | - | 0.1120 | - |
-| TN | Dummy | Train | A40 | 4 | 4 | 0.0466 | - | 0.1306 | 0.2008 |
-| TN | Dummy | Smooth Inference | A40 | 4 | 4 | - | - | - | - |
-| TN | ImageNet | Inference | V100 | 2 | 4 | 0.1171 | - | 0.1202 | - |
-| TN | ImageNet | Train | V100 | 2 | 4 | 0.0201 | - | 0.1279 | 0.2444 |
-| TN | ImageNet | Smooth Inference | V100 | 2 | 4 | 0.1015 | 0.0009 | 0.0080 | - |
-| TN | Dummy | Inference | V100 | 2 | 4 | 0.0384 | - | 0.1150 | - |
-| TN | Dummy | Train | V100 | 2 | 4 | 0.0348 | - | 0.1260 | 0.2441 |
-| TN | Dummy | Smooth Inference | V100 | 2 | 4 | 0.1016 | 0.0009 | 0.0079 | - | -->
-
-
+| JADE2 | ImageNet | Inference | V100 | 4 | 4 | 5.8355 | - | 1.1637 | - |
+| JADE2 | ImageNet | Train | V100 | 4 | 4 | 5.2553 | - | 1.3720 | 0.8037 |
+| JADE2 | ImageNet | Smooth Inference | V100 | 4 | 4 | 0.2201 | 0.0503 | 0.0400 | - |
+| JADE2 | Dummy | Inference | V100 | 4 | 4 | 3.3424 | - | 0.9132 | - |
+| JADE2 | Dummy | Train | V100 | 4 | 4 | 2.8620 | - | 1.0636 | 0.6111 |
+| JADE2 | Dummy | Smooth Inference | V100 | 4 | 4 | 0.1844 | 0.0468 | 0.559 | - |
+| JADE2 | ImageNet | Inference | V100 | 1 | 4 | 1.0153 | - | 0.1510 | - |
+| JADE2 | ImageNet | Train | V100 | 1 | 4 | 0.6594 | - | 0.1774 | 0.3166 |
+| JADE2 | ImageNet | Smooth Inference | V100 | 1 | 4 | 0.1281 | 0.0023 | 0.0121 | - |
+| JADE2 | Dummy | Inference | V100 | 1 | 4 | 0.4596 | - | 0.1871 | - |
+| JADE2 | Dummy | Train | V100 | 1 | 4 | 0.2058 | - | 0.2137 | 0.3367 |
+| JADE2 | Dummy | Smooth Inference | V100 | 1 | 4 | 0.1302 | 0.0026 | 0.0121 | - |
 
 
 ### Expected Speed
