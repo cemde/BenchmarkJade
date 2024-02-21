@@ -15,7 +15,13 @@ Benchmark JADE2 GPU Performance
 
 ### Resnet 50 (fp32)
 | Cluster | Dataset | Benchmark | Device Name | # Devices | Num Workers | Data Loading Time | Data Processing Time | Forward Time | Backward Time |
-| - | - | - | - | -: | -: | -: | -: | -: | -: | 
+| - | - | - | - | -: | -: | -: | -: | -: | -: |
+| TN | ImageNet | Inference | V100 | 1 | 4 | 0.1022 | - | 0.1128 | - |
+| TN | ImageNet | Train | V100 | 1 | 4 | 0.0100 | - | 0.1233 | 0.2378 |
+| TN | ImageNet | Smooth Inference | V100 | 1 | 4 | 0.1009 | 0.0009 | 0.0082 | - |
+| TN | Dummy | Inference | V100 | 1 | 4 | 0.0317 | - | 0.1116 | - |
+| TN | Dummy | Train | V100 | 1 | 4 | 0.0294 | - | 0.1226 | 0.2377 |
+| TN | Dummy | Smooth Inference | V100 | 1 | 4 | 0.1014 | 0.0009 | 0.0079 | - |
 | TN | ImageNet | Inference | A40 | 1 | 4 | 0.0403 | - | 0.0962 | - |
 | TN | ImageNet | Train | A40 | 1 | 4 | 0.0081 | - | 0.1102 | 0.1961 |
 | TN | ImageNet | Smooth Inference | A40 | 1 | 4 | 0.0882 | 0.0013 | 0.0048 | - |
