@@ -34,12 +34,12 @@ Benchmark JADE2 GPU Performance
 | TN | Dummy | Inference | A40 | 8 | 4 | 0.0539 | - | 0.1251 | - |
 | TN | Dummy | Train | A40 | 8 | 4 | 0.0601 | - | 0.1422 | 0.2109 |
 | TN | Dummy | Smooth Inference | A40 | 8 | 4 | 0.3265 | 0.0020 | 0.0074 | - |
-| JADE2 | ImageNet | Inference | V100 | 4 | 4 | 5.8355 | - | 1.1637 | - |
-| JADE2 | ImageNet | Train | V100 | 4 | 4 | 5.2553 | - | 1.3720 | 0.8037 |
-| JADE2 | ImageNet | Smooth Inference | V100 | 4 | 4 | 0.2201 | 0.0503 | 0.0400 | - |
-| JADE2 | Dummy | Inference | V100 | 4 | 4 | 3.3424 | - | 0.9132 | - |
-| JADE2 | Dummy | Train | V100 | 4 | 4 | 2.8620 | - | 1.0636 | 0.6111 |
-| JADE2 | Dummy | Smooth Inference | V100 | 4 | 4 | 0.1844 | 0.0468 | 0.559 | - |
+| JADE2 | ImageNet | Inference | V100 | 8 | 4 | 5.8355 | - | 1.1637 | - |
+| JADE2 | ImageNet | Train | V100 | 8 | 4 | 5.2553 | - | 1.3720 | 0.8037 |
+| JADE2 | ImageNet | Smooth Inference | V100 | 8 | 4 | 0.2201 | 0.0503 | 0.0400 | - |
+| JADE2 | Dummy | Inference | V100 | 8 | 4 | 3.3424 | - | 0.9132 | - |
+| JADE2 | Dummy | Train | V100 | 8 | 4 | 2.8620 | - | 1.0636 | 0.6111 |
+| JADE2 | Dummy | Smooth Inference | V100 | 8 | 4 | 0.1844 | 0.0468 | 0.559 | - |
 | JADE2 | ImageNet | Inference | V100 | 1 | 4 | 1.0153 | - | 0.1510 | - |
 | JADE2 | ImageNet | Train | V100 | 1 | 4 | 0.6594 | - | 0.1774 | 0.3166 |
 | JADE2 | ImageNet | Smooth Inference | V100 | 1 | 4 | 0.1281 | 0.0023 | 0.0121 | - |
@@ -61,7 +61,7 @@ JADE V100 0.67x as fast as V100
 
 8 x Jade V100 0.621 x as fast as 8 A40
 
-### Comparison
+### Conclusion
 
-Inference: JADE2 is 9.38 times slower than a A40. This is around 5.8 x slower than it should be.
-Train
+JADE2 is slower than expected on single GPU.
+JADE2 is A LOT slower than expected on 8 GPUs.
