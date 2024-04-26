@@ -11,7 +11,7 @@
 # define variables
 PYTHON="/jmain02/home/J2AD009/ttl04/cxe09-ttl04/anaconda3/envs/advcal/bin/python"
 HOME_DIR="/jmain02/home/J2AD009/ttl04/cxe09-ttl04/BenchmarkJade"
-DATASET="imagenet"
+DATASET="dummy"
 
 module purge
 

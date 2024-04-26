@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --nodes=1
-#SBATCH --time=00-00:30:00
-#SBATCH --job-name=inference-small
+#SBATCH --time=00-10:30:00
+#SBATCH --job-name=smooth-inference
 #SBATCH --mail-type=ALL
 #SBATCH --gres=gpu:1
 #SBATCH --partition=small
@@ -15,4 +15,4 @@ DATASET="dummy"
 
 module purge
 
-$PYTHON ${HOME_DIR}/inference.py --dataset ${DATASET}
+$PYTHON ${HOME_DIR}/smooth_inference.py --dataset ${DATASET}

@@ -2,10 +2,11 @@
 
 #SBATCH --nodes=1
 #SBATCH --time=00-00:30:00
-#SBATCH --job-name=inference-small
+#SBATCH --job-name=inference-dummy-big
 #SBATCH --mail-type=ALL
-#SBATCH --gres=gpu:1
-#SBATCH --partition=small
+#SBATCH --gres=gpu:8
+#SBATCH --cpus-per-task=4
+#SBATCH --partition=big
 #SBATCH --output ./logs/slurm/slurm-%j-%x.out # STDOUT
 
 # define variables

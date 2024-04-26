@@ -1,0 +1,45 @@
+/jmain02/home/J2AD009/ttl04/cxe09-ttl04/anaconda3/envs/advcal/lib/python3.10/site-packages/torch/utils/data/dataloader.py:561: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/jmain02/home/J2AD009/ttl04/cxe09-ttl04/anaconda3/envs/advcal/lib/python3.10/site-packages/lightning/fabric/plugins/environments/slurm.py:165: PossibleUserWarning: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python /jmain02/home/J2AD009/ttl04/cxe09-ttl04/BenchmarkJad ...
+  rank_zero_warn(
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+Batch 101: Data Loading Time: 0.4876 seconds, Forward Pass Time: 0.1437 seconds, Backward Pass Time: 0.3247, Batch Size: 128
+Batch 201: Data Loading Time: 0.3416 seconds, Forward Pass Time: 0.1664 seconds, Backward Pass Time: 0.3071, Batch Size: 128
+Batch 301: Data Loading Time: 0.1114 seconds, Forward Pass Time: 0.1756 seconds, Backward Pass Time: 0.3073, Batch Size: 128
+--------------------------------------------------
+Arguments
+--------------------------------------------------
+dataset: dummy
+batch_size: 128
+num_workers: 4
+precision: 32-true
+devices: -1
+architecture: resnet50
+strategy: ddp
+
+--------------------------------------------------
+System Information
+--------------------------------------------------
+Physical CPU Cores: 40
+Virtual CPU Cores:  80
+CPU Model:          x86_64
+Total Memory:       503.30 GB
+------------------------------
+torch version:      2.0.0+cu117
+cuda version:       11.7
+driver version:     470.182.03
+Devices:            1 x Tesla V100-SXM2-32GB-LS
+--------------------------------------------------
+Benchmark Results
+--------------------------------------------------
+Devices used:                    1 x Tesla V100-SXM2-32GB-LS
+Average Data Loading Time:       0.2058 seconds
+Average Data Preprocessing Time: 0.0000 seconds
+Average Forward Pass Time:       0.2137 seconds
+Average Backward Pass Time:      0.3367 seconds
+Total Script Time:               295.7838 seconds
