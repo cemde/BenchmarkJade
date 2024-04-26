@@ -5,7 +5,7 @@
 #SBATCH --job-name=inference-dummy-big
 #SBATCH --mail-type=ALL
 #SBATCH --gres=gpu:8
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=10
 #SBATCH --partition=big
 #SBATCH --output ./logs/slurm/slurm-%j-%x.out # STDOUT
 
